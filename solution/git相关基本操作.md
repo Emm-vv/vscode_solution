@@ -20,3 +20,22 @@ git push -u origin main
 git remote add origin https://github.com/Emm-vv/C_vscode_Chinese_powershell_encoding_solve.git  # 地址要改，此处为示例
 git branch -M main
 git push -u origin main
+
+
+
+## 2
+由远程仓库同步内容下来
+在存储库栏点击同步更改（如果没有存储库栏则在最上面源代码管理右边三个点中打开即可）
+即会同步更新内容
+
+如果对同一个版本有两个冲突更改则要求保留一个更改，再提交，所以协同工作时一般先更新再提交？
+
+## 3
+创建分支  可视化操作为点击存储库栏的分支按钮，命名创建分支即可
+git branch 分支名
+切换分支  可视化操作为点击存储库栏的分支按钮，选择要切换的分支
+git checkout 分支名
+删除分支
+git branch -d 分支名
+创建并切换分支
+git checkout -b 分支名
