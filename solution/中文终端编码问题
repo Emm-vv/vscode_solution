@@ -1,0 +1,46 @@
+需要在task.json  launch.json中做合适配置
+
+task.json决定编译输入输出的编码，而launch.json只强制决定运行调试时的编码（如果指定将不受原来终端编码影响）
+所以这个配置更重要，另一个可以通过修改终端编码解决或修改此处输出编码格式即可
+			"args": [
+				// 决定编译输入输出的编码，而launch.json只强制决定运行调试时的编码（如果指定将不受原来终端编码影响）
+				// 所以这个配置更重要，另一个可以通过修改终端编码解决或修改此处输出编码格式即可
+				"-finput-charset=utf-8",  // 源码是 UTF-8 编码
+        		"-fexec-charset=gbk",     // 输出程序用 GBK 适配 Windows 控制台,调试时会因为打开一个VSCode 内置伪终端，时utf-8编码的，可以改一下
+				"-fdiagnostics-color=always",
+				"-Wall",  // 新增：开启所有常见警告，提升代码健壮性
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+			],
+
+
+调试配置，额外条添加这些内容，launch.json中
+    "configurations": [
+        {
+            // 所有路径不能有中文！！！！！，，要求下面exe文件为先运行一下得到的那个编译的exe
+            "program": "${workspaceFolder}/test/${fileBasenameNoExtension}.exe",//修改调试程序输出名，${fileBasenameNoExtension}要是指定文件才行，本处含义为当前打开的文件名文件，前面那个是路径
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            //把输出编码修改为gbk适应windows终端，VSCode 的调试器(cppdbg)不会继承 PowerShell 的编码（chcp 65001），而是一个虚拟终端，用完就关
+            // "environment": [
+            //     { "name": "LANG", "value": "zh_CN.GBK" }
+            // ],
+            // "miDebuggerArgs": "-iex \"set charset GBK\" -iex \"set print charset GBK\"",
+
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/mingw64/bin/gdb.exe",//修改添加gdb路径,环境配置正确可以之间写gdb
+
+
+
+            /在启动调试前，自动执行指定的编译任务，确保你调试的是最新编译的可执行文件。
+            //"task.gcc"是一个label（再task.json中，指定了任务标签），要再task.json中修改
+            "preLaunchTask": "task.gcc",
+
+        }
+    
+
+    ]

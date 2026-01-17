@@ -1,0 +1,25 @@
+浏览器走了代理
+你的 Chrome/Edge/Firfox 通常会：
+使用「系统代理」(PAC、HTTP/HTTPS 代理)
+或使用浏览器插件（SwitchyOmega / Proxy Switcher）
+因此浏览器访问 Google → 经代理 → 能打开
+
+❌ 终端命令不走代理
+ping、curl、wget、git 等终端程序不会自动识别系统代理
+必须自己设置：
+
+Windows PowerShell/CMD
+setx http_proxy http://127.0.0.1:7890
+setx https_proxy http://127.0.0.1:7890
+
+Linux / WSL / macOS
+export http_proxy=http://127.0.0.1:7890
+export https_proxy=http://127.0.0.1:7890
+
+注意：ping 是 ICMP，不经过代理，无论设没设代理，都 ping 不通。
+
+🎯 关键点总结
+行为	           是否走代理	                能否访问 Google
+浏览器 HTTP/HTTPS	✔️ 可以（插件/系统代理）	👍 通常能访问
+curl google.com	   ❓ 默认不走	              ❌ 需要设置环境变量
+ping google.com	    ❌ 永远不走，不支持	       ❌ 必定失败
