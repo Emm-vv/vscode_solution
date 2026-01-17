@@ -8,7 +8,7 @@ git commit -m "first commit"
 # git branch -m/M 重命名分支为 main ，没用-m/M则为新建，另创建并切换到新分支 git checkout -b branch1，没用-b则只是切换
 # -M为强制重命名选项（小写则为非强制，要求原来目标分支不存在），将当前所在的分支重命名为 main，如果当前不是 main 分支，则将其改名为 main
 git branch -M main
-# 给定将要远程提交的地址
+# 给定将要远程提交的地址， 可视化操作为存储库最右边三个点添加远程仓库
 git remote add origin 地址（大致由平台名和项目名组成，如果改名了要执行切换命令git remote set-url origin <新仓库地址.git>）
 # 提交到GitHub（如果地址是GitHub的），本地 main 分支与远程 origin/main 建立追踪关系，之后可以直接使用 git push 和 git pull 而无需指定分支
 # -u - 设置上游分支（--set-upstream 的简写）origin - 远程仓库名称（默认的远程仓库名，可以改）main - 要推送到的远程分支名
@@ -23,10 +23,6 @@ git push -u origin main
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
 ## 2
 由远程仓库同步内容下来
 在存储库栏点击同步更改（如果没有存储库栏则在最上面源代码管理右边三个点中打开即可）
@@ -42,16 +38,8 @@ git checkout 分支名
 删除分支
 git branch -d 分支名
 创建并切换分支
-<<<<<<< HEAD
-git checkout -b 分支名
-=======
 git checkout -b 分支名
 
-合并分支（应该不算常用，把旧分支合并到新分支，相当于旧分支的代码合并到新分支中）
-git merge 分支名             可视化为点击存储库栏的分支按钮，选择要合并的分支
+合并分支（应该不算常用，把旧分支合并到新分支）
+git merge 分支名             可视化为点击存储库栏的分支按钮，选择要合并的分支，注意冲突，打开冲突文件，一个个选择要哪个
 
-
-
-
-
->>>>>>> dev
