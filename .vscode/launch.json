@@ -1,0 +1,46 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) 启动",
+            "type": "cppdbg",
+            "request": "launch",
+            // 所有路径不能有中文！！！！！，，要求下面exe文件为先运行一下得到的那个编译的exe
+            "program": "${workspaceFolder}/test/${fileBasenameNoExtension}.exe",//修改调试程序输出名，${fileBasenameNoExtension}要是指定文件才行，本处含义为当前打开的文件名文件，前面那个是路径
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            //把输出编码修改为gbk适应windows终端，VSCode 的调试器(cppdbg)不会继承 PowerShell 的编码（chcp 65001），而是一个虚拟终端，用完就关
+            // "environment": [
+            //     { "name": "LANG", "value": "zh_CN.GBK" }
+            // ],
+            // "miDebuggerArgs": "-iex \"set charset GBK\" -iex \"set print charset GBK\"",
+
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/mingw64/bin/gdb.exe",//修改添加gdb路径,环境配置正确可以之间写gdb
+            
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "将反汇编风格设置为 Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            //在启动调试前，自动执行指定的编译任务，确保你调试的是最新编译的可执行文件。
+            //"task.gcc"是一个label（再task.json中，指定了任务标签），要再task.json中修改
+            "preLaunchTask": "task.gcc",
+
+        }
+    
+
+    ]
+}

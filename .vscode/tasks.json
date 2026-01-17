@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "task.gcc",
+			"command": "C:\\mingw64\\bin\\gcc.exe",
+			"args": [
+				// 决定编译输入输出的编码，而launch.json只强制决定运行调试时的编码（如果指定将不受原来终端编码影响）
+				// 所以这个配置更重要，另一个可以通过修改终端编码解决或修改此处输出编码格式即可
+				"-finput-charset=utf-8",  // 源码是 UTF-8 编码
+        		"-fexec-charset=gbk",     // 输出程序用 GBK 适配 Windows 控制台,调试时会因为打开一个VSCode 内置伪终端，时utf-8编码的，可以改一下
+				"-fdiagnostics-color=always",
+				"-Wall",  // 新增：开启所有常见警告，提升代码健壮性
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "编译器: C:\\mingw64\\bin\\gcc.exe"
+		}
+	]
+}
